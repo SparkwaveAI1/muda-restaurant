@@ -164,6 +164,8 @@ export default function Home() {
             <img src="/images/muda-food-6.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
             <img src="/images/muda-food-7.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
             <img src="/images/muda-food-8.jpg" alt="MUDA dish" className="w-full aspect-square object-cover col-span-2" />
+            <img src="/images/muda-food-9.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
+            <img src="/images/muda-food-10.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2" />
           </div>
         </div>
       </section>
