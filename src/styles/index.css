@@ -14,6 +14,9 @@
 }
 
 @layer components {
+  .btn-secondary {
+    @apply inline-block border border-black text-black px-8 py-3 text-xs tracking-[0.2em] uppercase font-body hover:bg-black hover:text-white transition-colors duration-300;
+  }
   .btn-primary {
     @apply inline-block bg-black text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-gold transition-colors duration-300;
   }

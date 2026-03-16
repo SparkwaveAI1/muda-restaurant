@@ -149,30 +149,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Food gallery grid */}
+      {/* Food gallery — masonry */}
       <section className="py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="section-heading">From the Kitchen</h2>
             <div className="gold-divider" />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-            <img src="/images/muda-food-1.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2 row-span-1" />
-            <img src="/images/muda-food-2.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-3.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-4.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-5.jpg" alt="MUDA dish" className="w-full aspect-square object-cover col-span-2" />
-            <img src="/images/muda-food-6.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-7.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-8.jpg" alt="MUDA dish" className="w-full aspect-square object-cover col-span-2" />
-            <img src="/images/muda-food-9.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-10.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2" />
-            <img src="/images/muda-food-11.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-12.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2" />
-            <img src="/images/muda-food-13.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-14.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2" />
-            <img src="/images/muda-food-15.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
-            <img src="/images/muda-food-16.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2" />
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-2 md:gap-3">
+            {[
+              ['/images/muda-food-1.jpg', 'MUDA seafood dish'],
+              ['/images/muda-food-2.jpg', 'MUDA dish'],
+              ['/images/muda-food-3.jpg', 'MUDA tuna dish'],
+              ['/images/muda-food-4.jpg', 'MUDA dish'],
+              ['/images/muda-food-6.jpg', 'MUDA dish'],
+              ['/images/muda-food-12.jpg', 'MUDA dish'],
+              ['/images/muda-food-13.jpg', 'MUDA dish'],
+              ['/images/muda-food-15.jpg', 'MUDA dish'],
+              ['/images/muda-food-16.jpg', 'MUDA ribs dish'],
+              ['/images/muda-pizza-closeup.jpg', 'Wood-fired pizza'],
+              ['/images/muda-dumplings.jpg', 'MUDA dumplings'],
+              ['/images/muda-dish-4th.jpg', 'MUDA dish'],
+            ].map(([src, alt]) => (
+              <img
+                key={src}
+                src={src}
+                alt={alt}
+                className="break-inside-avoid w-full mb-2 md:mb-3 object-cover"
+              />
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/gallery" className="btn-secondary">View Full Gallery</Link>
           </div>
         </div>
       </section>

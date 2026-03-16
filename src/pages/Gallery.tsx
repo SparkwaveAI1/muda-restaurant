@@ -1,18 +1,26 @@
 import SEOHead from '../components/SEOHead'
 
-const placeholders = [
-  { label: 'Fresh Tuna', aspect: 'aspect-video' },
-  { label: 'Garlic Shrimp', aspect: 'aspect-square' },
-  { label: 'Seafood Risotto', aspect: 'aspect-square' },
-  { label: 'Wood-fired Pizza', aspect: 'aspect-video' },
-  { label: 'Restaurant Interior', aspect: 'aspect-video' },
-  { label: 'Overnight Ribs', aspect: 'aspect-square' },
-  { label: 'Ceviche MUDA Style', aspect: 'aspect-square' },
-  { label: 'Upstairs Terrace', aspect: 'aspect-video' },
-  { label: 'Cumbuco Sunset', aspect: 'aspect-square' },
-  { label: 'Craft Cocktails', aspect: 'aspect-square' },
-  { label: 'Octopus Dish', aspect: 'aspect-video' },
-  { label: 'Dessert', aspect: 'aspect-square' },
+// Unique photos only — duplicates removed
+const PHOTOS: [string, string][] = [
+  ['/images/hero-terrace.jpg', 'MUDA upstairs terrace at night'],
+  ['/images/muda-exterior.jpg', 'MUDA exterior with bougainvillea'],
+  ['/images/muda-cocktail.jpg', 'Aperol Spritz at MUDA'],
+  ['/images/muda-food-1.jpg', 'Fresh seafood dish'],
+  ['/images/muda-food-2.jpg', 'MUDA kitchen creation'],
+  ['/images/muda-food-3.jpg', 'Tuna on banana leaf'],
+  ['/images/muda-food-4.jpg', 'MUDA dish'],
+  ['/images/muda-food-6.jpg', 'Garlic shrimp platter'],
+  ['/images/muda-food-12.jpg', 'MUDA dish'],
+  ['/images/muda-food-13.jpg', 'MUDA dish'],
+  ['/images/muda-food-15.jpg', 'MUDA dish'],
+  ['/images/muda-food-16.jpg', 'Slow-cooked ribs'],
+  ['/images/muda-seafood.jpg', 'Fresh seafood of the day'],
+  ['/images/muda-woodfire-oven.jpg', 'Wood-fired pizza oven'],
+  ['/images/muda-pizza-closeup.jpg', 'Wood-fired pizza'],
+  ['/images/muda-dumplings.jpg', 'MUDA dumplings'],
+  ['/images/muda-dish-4th.jpg', 'MUDA kitchen creation'],
+  ['/images/muda-dessert.jpg', 'Brownie with cashew ice cream'],
+  ['/images/muda-interior.jpg', 'MUDA restaurant interior'],
 ]
 
 export default function Gallery() {
@@ -31,54 +39,22 @@ export default function Gallery() {
       </div>
 
       <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6">
           <p className="text-center text-gray-500 font-body leading-relaxed mb-12 max-w-xl mx-auto">
             Restaurants are hard to explain with words alone. The best way to understand MUDA is to see it — the upstairs breeze, the kitchen plates, the cocktails, and the nights when the whole place fills with people sharing food and stories.
           </p>
 
-          <div className="columns-2 md:columns-3 gap-3 space-y-3">
-            {/* Real photos */}
-            {[
-              ['/images/hero-terrace.jpg', 'MUDA terrace at night'],
-              ['/images/muda-food-1.jpg', 'MUDA dish'],
-              ['/images/muda-food-2.jpg', 'MUDA dish'],
-              ['/images/muda-food-3.jpg', 'MUDA dish'],
-              ['/images/muda-food-4.jpg', 'MUDA dish'],
-              ['/images/muda-food-5.jpg', 'MUDA dish'],
-              ['/images/muda-food-6.jpg', 'MUDA dish'],
-              ['/images/muda-food-7.jpg', 'MUDA dish'],
-              ['/images/muda-food-8.jpg', 'MUDA dish'],
-              ['/images/muda-dessert.jpg', 'Brownie with cashew ice cream'],
-              ['/images/muda-woodfire-oven.jpg', 'Wood-fired pizza oven'],
-              ['/images/muda-exterior.jpg', 'MUDA exterior with bougainvillea'],
-              ['/images/muda-interior.jpg', 'MUDA restaurant'],
-              ['/images/muda-food-9.jpg', 'MUDA dish'],
-              ['/images/muda-food-10.jpg', 'MUDA dish'],
-              ['/images/muda-food-11.jpg', 'MUDA dish'],
-              ['/images/muda-food-12.jpg', 'MUDA dish'],
-              ['/images/muda-food-13.jpg', 'MUDA dish'],
-              ['/images/muda-food-14.jpg', 'MUDA dish'],
-              ['/images/muda-food-15.jpg', 'MUDA dish'],
-              ['/images/muda-food-16.jpg', 'MUDA dish'],
-            ].map(([src, alt]) => (
-              <img key={src} src={src} alt={alt} className="break-inside-avoid w-full object-cover mb-3" />
-            ))}
-            {placeholders.slice(13).map(({ label, aspect }) => (
-              <div
-                key={label}
-                className={`break-inside-avoid bg-gray-100 ${aspect} w-full flex items-center justify-center overflow-hidden`}
-              >
-                <div className="text-center p-4">
-                  <div className="w-6 h-px bg-gray-300 mx-auto mb-2" />
-                  <p className="text-xs text-gray-400 font-body tracking-wider uppercase">{label}</p>
-                </div>
-              </div>
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-3">
+            {PHOTOS.map(([src, alt]) => (
+              <img
+                key={src}
+                src={src}
+                alt={alt}
+                className="break-inside-avoid w-full mb-3 object-cover"
+                loading="lazy"
+              />
             ))}
           </div>
-
-          <p className="text-center text-xs text-gray-400 font-body mt-10 tracking-wide">
-            Photos coming soon. Follow us on Instagram for the latest.
-          </p>
         </div>
       </section>
     </>
