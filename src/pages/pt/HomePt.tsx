@@ -49,7 +49,7 @@ export default function HomePt() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/pt/reservas" className="btn-primary">Reservar Mesa</Link>
-            <Link to="/pt/cardapio" className="btn-outline">Ver Cardápio</Link>
+            <Link to="/pt/cardapio" className="inline-block border border-white text-white px-8 py-3 text-xs tracking-[0.2em] uppercase font-body hover:bg-white hover:text-black transition-colors duration-300">Ver Cardápio</Link>
           </div>
           <p className="mt-8 text-white/60 font-body text-sm tracking-wide">Aberto todos os dias · 17:30</p>
         </div>
