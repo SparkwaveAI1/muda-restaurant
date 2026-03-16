@@ -108,7 +108,8 @@ export default function Home() {
               {
                 title: 'Fresh Seafood',
                 desc: 'The catch of the day drives the menu. Fish, shrimp, octopus, and whatever arrives fresh from the coast of Ceará.',
-                img: null,
+                img: '/images/muda-seafood.jpg',
+                imgAlt: 'Fresh seafood at MUDA Restaurant',
                 icon: '🐟',
               },
               {
