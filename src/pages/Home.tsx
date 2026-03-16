@@ -108,24 +108,35 @@ export default function Home() {
               {
                 title: 'Fresh Seafood',
                 desc: 'The catch of the day drives the menu. Fish, shrimp, octopus, and whatever arrives fresh from the coast of Ceará.',
+                img: null,
                 icon: '🐟',
               },
               {
                 title: 'Wood-Fired Pizza',
                 desc: 'Our oven turns out thin-crust pizzas with local and imported ingredients. A favourite since day one.',
+                img: '/images/muda-woodfire-oven.jpg',
+                imgAlt: 'Wood-fired pizza oven at MUDA',
                 icon: '🍕',
               },
               {
-                title: 'Craft Cocktails',
-                desc: 'Caipirinhas, mojitos, and creative cocktails made with fresh fruit and good spirits. The bar opens at 17:30.',
-                icon: '🍹',
+                title: 'From the Kitchen',
+                desc: 'Creative desserts, slow-cooked meats, and dishes that surprise. The kitchen develops its own personality every night.',
+                img: '/images/muda-dessert.jpg',
+                imgAlt: 'Brownie with cashew ice cream at MUDA',
+                icon: '🍽️',
               },
-            ].map(({ title, desc, icon }) => (
-              <div key={title} className="bg-white p-8 text-center shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="text-3xl mb-4">{icon}</div>
-                <h3 className="font-heading text-xl mb-3">{title}</h3>
-                <div className="w-8 h-px bg-gold mx-auto mb-4" />
-                <p className="text-gray-500 font-body text-sm leading-relaxed">{desc}</p>
+            ].map(({ title, desc, img, imgAlt, icon }) => (
+              <div key={title} className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+                {img ? (
+                  <img src={img} alt={imgAlt} className="w-full h-48 object-cover" />
+                ) : (
+                  <div className="w-full h-48 bg-gray-100 flex items-center justify-center text-4xl">{icon}</div>
+                )}
+                <div className="p-8 text-center">
+                  <h3 className="font-heading text-xl mb-3">{title}</h3>
+                  <div className="w-8 h-px bg-gold mx-auto mb-4" />
+                  <p className="text-gray-500 font-body text-sm leading-relaxed">{desc}</p>
+                </div>
               </div>
             ))}
           </div>
