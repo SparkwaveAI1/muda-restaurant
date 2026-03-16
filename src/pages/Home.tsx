@@ -148,6 +148,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Food gallery grid */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="section-heading">From the Kitchen</h2>
+            <div className="gold-divider" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+            <img src="/images/muda-food-1.jpg" alt="MUDA dish" className="w-full aspect-video object-cover col-span-2 row-span-1" />
+            <img src="/images/muda-food-2.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
+            <img src="/images/muda-food-3.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
+            <img src="/images/muda-food-4.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
+            <img src="/images/muda-food-5.jpg" alt="MUDA dish" className="w-full aspect-square object-cover col-span-2" />
+            <img src="/images/muda-food-6.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
+            <img src="/images/muda-food-7.jpg" alt="MUDA dish" className="w-full aspect-square object-cover" />
+            <img src="/images/muda-food-8.jpg" alt="MUDA dish" className="w-full aspect-square object-cover col-span-2" />
+          </div>
+        </div>
+      </section>
+
       {/* CTA banner */}
       <section className="bg-black text-white py-20 text-center">
         <div className="max-w-2xl mx-auto px-6">

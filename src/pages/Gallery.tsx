@@ -38,12 +38,24 @@ export default function Gallery() {
 
           <div className="columns-2 md:columns-3 gap-3 space-y-3">
             {/* Real photos */}
-            <img src="/images/hero-terrace.jpg" alt="MUDA terrace at night" className="break-inside-avoid w-full object-cover" />
-            <img src="/images/muda-dessert.jpg" alt="Brownie with cashew ice cream" className="break-inside-avoid w-full object-cover" />
-            <img src="/images/muda-woodfire-oven.jpg" alt="Wood-fired pizza oven" className="break-inside-avoid w-full object-cover" />
-            <img src="/images/muda-exterior.jpg" alt="MUDA exterior with bougainvillea" className="break-inside-avoid w-full object-cover" />
-            <img src="/images/muda-interior.jpg" alt="MUDA restaurant" className="break-inside-avoid w-full object-cover" />
-            {placeholders.slice(5).map(({ label, aspect }) => (
+            {[
+              ['/images/hero-terrace.jpg', 'MUDA terrace at night'],
+              ['/images/muda-food-1.jpg', 'MUDA dish'],
+              ['/images/muda-food-2.jpg', 'MUDA dish'],
+              ['/images/muda-food-3.jpg', 'MUDA dish'],
+              ['/images/muda-food-4.jpg', 'MUDA dish'],
+              ['/images/muda-food-5.jpg', 'MUDA dish'],
+              ['/images/muda-food-6.jpg', 'MUDA dish'],
+              ['/images/muda-food-7.jpg', 'MUDA dish'],
+              ['/images/muda-food-8.jpg', 'MUDA dish'],
+              ['/images/muda-dessert.jpg', 'Brownie with cashew ice cream'],
+              ['/images/muda-woodfire-oven.jpg', 'Wood-fired pizza oven'],
+              ['/images/muda-exterior.jpg', 'MUDA exterior with bougainvillea'],
+              ['/images/muda-interior.jpg', 'MUDA restaurant'],
+            ].map(([src, alt]) => (
+              <img key={src} src={src} alt={alt} className="break-inside-avoid w-full object-cover mb-3" />
+            ))}
+            {placeholders.slice(13).map(({ label, aspect }) => (
               <div
                 key={label}
                 className={`break-inside-avoid bg-gray-100 ${aspect} w-full flex items-center justify-center overflow-hidden`}
