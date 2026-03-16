@@ -54,6 +54,12 @@ export default function Gallery() {
               ['/images/muda-interior.jpg', 'MUDA restaurant'],
               ['/images/muda-food-9.jpg', 'MUDA dish'],
               ['/images/muda-food-10.jpg', 'MUDA dish'],
+              ['/images/muda-food-11.jpg', 'MUDA dish'],
+              ['/images/muda-food-12.jpg', 'MUDA dish'],
+              ['/images/muda-food-13.jpg', 'MUDA dish'],
+              ['/images/muda-food-14.jpg', 'MUDA dish'],
+              ['/images/muda-food-15.jpg', 'MUDA dish'],
+              ['/images/muda-food-16.jpg', 'MUDA dish'],
             ].map(([src, alt]) => (
               <img key={src} src={src} alt={alt} className="break-inside-avoid w-full object-cover mb-3" />
             ))}
