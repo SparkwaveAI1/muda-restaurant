@@ -5,6 +5,7 @@ const PHOTOS: [string, string][] = [
   ['/images/hero-terrace.jpg', 'MUDA upstairs terrace at night'],
   ['/images/muda-exterior.jpg', 'MUDA exterior with bougainvillea'],
   ['/images/muda-cocktail.jpg', 'Aperol Spritz at MUDA'],
+  ['/images/muda-tuna.jpg', 'Seared tuna on arugula'],
   ['/images/muda-food-1.jpg', 'Fresh seafood dish'],
   ['/images/muda-food-2.jpg', 'MUDA kitchen creation'],
   ['/images/muda-food-3.jpg', 'Tuna on banana leaf'],

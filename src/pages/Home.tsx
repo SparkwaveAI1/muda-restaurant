@@ -158,6 +158,7 @@ export default function Home() {
           </div>
           <div className="columns-2 md:columns-3 lg:columns-4 gap-2 md:gap-3">
             {[
+              ['/images/muda-tuna.jpg', 'Seared tuna on arugula'],
               ['/images/muda-food-1.jpg', 'MUDA seafood dish'],
               ['/images/muda-food-2.jpg', 'MUDA dish'],
               ['/images/muda-food-3.jpg', 'MUDA tuna dish'],

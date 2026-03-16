@@ -4,6 +4,8 @@ export interface BlogPost {
   excerpt: string
   date: string
   content: string
+  image?: string
+  imageAlt?: string
 }
 
 export const blogPosts: BlogPost[] = [
@@ -41,6 +43,8 @@ That's what dinner in Cumbuco is really about.`,
     title: 'Fresh Seafood on the Coast of Ceará',
     excerpt: 'The coast of Ceará has a certain rhythm. Fishing boats, fresh catch, and evenings that taste like the sea.',
     date: 'March 2026',
+    image: '/images/muda-tuna.jpg',
+    imageAlt: 'Seared tuna on arugula at MUDA Restaurant Cumbuco',
     content: `The coast of Ceará has a certain rhythm to it.
 
 Fishing boats head out early in the morning while the village is still quiet. By afternoon the beaches fill with wind and kitesurfers. And in the evening the restaurants begin preparing dinner.

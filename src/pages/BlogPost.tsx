@@ -43,10 +43,16 @@ export default function BlogPost() {
         <div className="w-12 h-px bg-gold mx-auto mt-6" />
       </div>
 
-      {/* Hero image placeholder */}
-      <div className="aspect-video md:aspect-[21/6] bg-gray-100 flex items-center justify-center max-h-64 md:max-h-80">
-        <div className="text-xs text-gray-400 font-body tracking-wider uppercase">Photo</div>
-      </div>
+      {/* Hero image */}
+      {post.image ? (
+        <div className="max-h-80 overflow-hidden">
+          <img src={post.image} alt={post.imageAlt ?? post.title} className="w-full object-cover max-h-80" />
+        </div>
+      ) : (
+        <div className="aspect-video md:aspect-[21/6] bg-gray-100 flex items-center justify-center max-h-64 md:max-h-80">
+          <div className="text-xs text-gray-400 font-body tracking-wider uppercase">Photo</div>
+        </div>
+      )}
 
       {/* Content */}
       <section className="py-20">
