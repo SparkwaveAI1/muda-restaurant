@@ -31,8 +31,14 @@ export default function Home() {
       />
 
       {/* Hero */}
-      <section className="bg-black text-white py-32 md:py-48 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
+      <section className="text-white py-32 md:py-48 text-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(/images/hero-terrace.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 40%',
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         <div className="relative z-10 max-w-3xl mx-auto px-6">
           <div className="text-xs tracking-[0.35em] uppercase text-gold mb-6 font-body">
             Cumbuco · Ceará · Brazil
@@ -81,9 +87,9 @@ export default function Home() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div className="aspect-square bg-gray-100 rounded-sm" />
-              <div className="aspect-square bg-gray-200 rounded-sm mt-8" />
-              <div className="aspect-square bg-gray-200 rounded-sm -mt-4" />
+              <img src="/images/hero-terrace.jpg" alt="MUDA terrace at night" className="aspect-square object-cover rounded-sm" />
+              <img src="/images/muda-interior.jpg" alt="MUDA restaurant interior" className="aspect-square object-cover rounded-sm mt-8" />
+              <div className="aspect-square bg-gray-100 rounded-sm -mt-4" />
               <div className="aspect-square bg-gray-100 rounded-sm mt-4" />
             </div>
           </div>
