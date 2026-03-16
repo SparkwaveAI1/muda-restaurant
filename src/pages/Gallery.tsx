@@ -2,6 +2,8 @@ import SEOHead from '../components/SEOHead'
 
 // Unique photos only — duplicates removed
 const PHOTOS: [string, string][] = [
+  ['/images/muda-evening.jpg', 'MUDA restaurant full house at night'],
+  ['/images/muda-group.jpg', 'Group dinner at MUDA Cumbuco'],
   ['/images/hero-terrace.jpg', 'MUDA upstairs terrace at night'],
   ['/images/muda-exterior.jpg', 'MUDA exterior with bougainvillea'],
   ['/images/muda-cocktail.jpg', 'Aperol Spritz at MUDA'],

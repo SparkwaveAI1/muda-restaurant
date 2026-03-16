@@ -14,6 +14,8 @@ export const blogPosts: BlogPost[] = [
     title: 'Where to Eat in Cumbuco After Kitesurfing',
     excerpt: 'After a long day on the water, one question always comes up. Here is where the answer usually leads.',
     date: 'March 2026',
+    image: '/images/muda-group.jpg',
+    imageAlt: 'Group of friends enjoying dinner and cocktails at MUDA Restaurant Cumbuco',
     content: `If you spend the afternoon on the water in Cumbuco, the evening usually begins the same way.
 
 Boards come off the beach. Harnesses hit the sand. Someone checks the wind forecast for tomorrow. Then everyone starts asking the same question:
@@ -68,6 +70,8 @@ And if you're sitting outside on a warm evening with the ocean air moving throug
     title: 'A Perfect Evening in Cumbuco',
     excerpt: 'Evenings in Cumbuco have their own pace. Here is how a typical night unfolds.',
     date: 'February 2026',
+    image: '/images/muda-evening.jpg',
+    imageAlt: 'MUDA Restaurant terrace at night with rattan lamps and guests dining',
     content: `Evenings in Cumbuco have their own pace.
 
 During the day the village revolves around the wind. Kitesurfers head out to the water, dune tours move across the sand, and the beach is full of activity.
