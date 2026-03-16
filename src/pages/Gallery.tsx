@@ -16,7 +16,6 @@ const PHOTOS: [string, string][] = [
   ['/images/muda-food-16.jpg', 'Slow-cooked ribs'],
   ['/images/muda-seafood.jpg', 'Fresh seafood of the day'],
   ['/images/muda-woodfire-oven.jpg', 'Wood-fired pizza oven'],
-  ['/images/muda-pizza-closeup.jpg', 'Wood-fired pizza'],
   ['/images/muda-dumplings.jpg', 'MUDA dumplings'],
   ['/images/muda-dish-4th.jpg', 'MUDA kitchen creation'],
   ['/images/muda-dessert.jpg', 'Brownie with cashew ice cream'],

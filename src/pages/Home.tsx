@@ -167,7 +167,7 @@ export default function Home() {
               ['/images/muda-food-13.jpg', 'MUDA dish'],
               ['/images/muda-food-15.jpg', 'MUDA dish'],
               ['/images/muda-food-16.jpg', 'MUDA ribs dish'],
-              ['/images/muda-pizza-closeup.jpg', 'Wood-fired pizza'],
+              ['/images/muda-woodfire-oven.jpg', 'Wood-fired pizza oven'],
               ['/images/muda-dumplings.jpg', 'MUDA dumplings'],
               ['/images/muda-dish-4th.jpg', 'MUDA dish'],
             ].map(([src, alt]) => (
