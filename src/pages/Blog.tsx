@@ -22,9 +22,13 @@ export default function Blog() {
           <div className="grid md:grid-cols-2 gap-8">
             {blogPosts.map((post) => (
               <article key={post.slug} className="border border-gray-100 hover:border-gold transition-colors duration-300 group">
-                <div className="aspect-video bg-gray-100 flex items-center justify-center">
-                  <div className="text-xs text-gray-400 font-body tracking-wider uppercase">Photo</div>
-                </div>
+                {post.image ? (
+                  <img src={post.image} alt={post.imageAlt ?? post.title} className="w-full aspect-video object-cover" />
+                ) : (
+                  <div className="aspect-video bg-gray-100 flex items-center justify-center">
+                    <div className="text-xs text-gray-400 font-body tracking-wider uppercase">Photo</div>
+                  </div>
+                )}
                 <div className="p-8">
                   <div className="text-xs tracking-[0.2em] uppercase text-gold font-body mb-3">{post.date}</div>
                   <h2 className="font-heading text-xl mb-3 group-hover:text-gold transition-colors">{post.title}</h2>
