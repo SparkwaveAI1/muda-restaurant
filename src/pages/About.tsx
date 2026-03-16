@@ -9,11 +9,20 @@ export default function About() {
         canonical="/about"
       />
 
-      {/* Page header */}
-      <div className="bg-black text-white py-20 text-center">
-        <div className="text-xs tracking-[0.35em] uppercase text-gold mb-4 font-body">Our Story</div>
-        <h1 className="font-heading text-4xl md:text-5xl">The story behind MUDA</h1>
-        <div className="w-12 h-px bg-gold mx-auto mt-6" />
+      {/* Page header with exterior photo */}
+      <div className="text-white py-20 text-center relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(/images/muda-exterior.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 60%',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="relative z-10">
+          <div className="text-xs tracking-[0.35em] uppercase text-gold mb-4 font-body">Our Story</div>
+          <h1 className="font-heading text-4xl md:text-5xl">The story behind MUDA</h1>
+          <div className="w-12 h-px bg-gold mx-auto mt-6" />
+        </div>
       </div>
 
       {/* Story */}
