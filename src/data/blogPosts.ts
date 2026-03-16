@@ -98,6 +98,8 @@ And before you know it, the night in Cumbuco has taken care of itself.`,
   },
   {
     slug: 'best-restaurants-cumbuco',
+    image: '/images/muda-burger.jpg',
+    imageAlt: 'Gourmet burger with crispy chips at MUDA Restaurant Cumbuco',
     title: 'Best Restaurants in Cumbuco: A Local Dining Guide',
     excerpt: 'Cumbuco is known first for wind and water. But the dining scene has grown into something worth writing about.',
     date: 'February 2026',
