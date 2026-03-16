@@ -87,7 +87,7 @@ export default function Home() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <img src="/images/muda-pizza-closeup.jpg" alt="Wood-fired pizza at MUDA" className="aspect-square object-cover rounded-sm" />
+              <img src="/images/muda-cocktail.jpg" alt="Aperol Spritz at MUDA" className="aspect-square object-cover rounded-sm" />
               <img src="/images/muda-dessert.jpg" alt="Brownie with cashew ice cream" className="aspect-square object-cover rounded-sm mt-8" />
               <img src="/images/muda-dumplings.jpg" alt="MUDA dish" className="aspect-square object-cover rounded-sm -mt-4" />
               <img src="/images/muda-dish-4th.jpg" alt="MUDA dish" className="aspect-square object-cover rounded-sm mt-4" />
