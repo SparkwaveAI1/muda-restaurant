@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MUDA Menu Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #111; color: #eee; font-family: Inter, sans-serif; }
+    .drag-over { background: rgba(212,160,23,0.15) !important; border: 2px dashed #d4a017 !important; }
+    .dragging { opacity: 0.4; }
+    .item-row { cursor: grab; transition: background 0.15s; }
+    .item-row:active { cursor: grabbing; }
+    .item-row:hover { background: rgba(255,255,255,0.05); }
+    input, textarea, select {
+      background: #1e1e1e; border: 1px solid #333; color: #eee;
+      border-radius: 6px; padding: 8px 10px; width: 100%;
+      font-size: 14px; outline: none; transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus { border-color: #d4a017; }
+    .btn-gold { background: #d4a017; color: #111; font-weight: 700; border-radius: 8px; padding: 8px 18px; cursor: pointer; border: none; transition: background 0.15s; }
+    .btn-gold:hover { background: #e6b020; }
+    .btn-red { background: transparent; color: #f87171; border: 1px solid #f87171; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 12px; transition: all 0.15s; }
+    .btn-red:hover { background: #f87171; color: white; }
+    .btn-ghost { background: transparent; color: #aaa; border: 1px solid #333; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 12px; transition: all 0.15s; }
+    .btn-ghost:hover { border-color: #d4a017; color: #d4a017; }
+    .tab { padding: 8px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.15s; border: 1px solid transparent; }
+    .tab.active { background: #d4a017; color: #111; }
+    .tab:not(.active) { color: #aaa; border-color: #333; }
+    .tab:not(.active):hover { color: #d4a017; border-color: #d4a017; }
+    .saved-toast { position: fixed; bottom: 24px; right: 24px; background: #16a34a; color: white; padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; display: none; z-index: 999; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="min-h-screen flex items-center justify-center">
+  <div class="w-80 bg-white/5 border border-white/10 rounded-2xl p-8">
+    <div class="text-center mb-6">
+      <div class="font-serif text-2xl text-yellow-400 mb-1" style="font-family:Georgia,serif">MUDA</div>
+      <div class="text-white/50 text-sm">Menu Admin</div>
+    </div>
+    <input id="pw" type="password" placeholder="Password" class="mb-3" />
+    <button onclick="login()" class="btn-gold w-full py-2.5">Sign In</button>
+    <div id="pw-err" class="text-red-400 text-xs text-center mt-2 hidden">Incorrect password</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden min-h-screen">
+  <!-- Header -->
+  <div class="border-b border-white/10 px-6 py-4 flex items-center justify-between sticky top-0 z-50 bg-[#111]">
+    <div class="flex items-center gap-3">
+      <span class="font-serif text-yellow-400 text-lg" style="font-family:Georgia,serif">MUDA</span>
+      <span class="text-white/30">·</span>
+      <span class="text-white/60 text-sm">Menu Editor</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="/en/menu" target="_blank" class="text-white/40 text-sm hover:text-white transition-colors">View Menu ↗</a>
+      <button onclick="logout()" class="text-white/30 text-sm hover:text-white transition-colors">Logout</button>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Category tabs -->
+    <div class="flex flex-wrap gap-2 mb-6" id="category-tabs"></div>
+
+    <!-- Add category -->
+    <div class="flex gap-2 mb-8">
+      <input id="new-cat-label" type="text" placeholder="New category name…" style="max-width:200px" />
+      <button onclick="addCategory()" class="btn-ghost">+ Add Category</button>
+    </div>
+
+    <!-- Active category editor -->
+    <div id="category-editor"></div>
+
+    <!-- Add item form -->
+    <div class="mt-6 border border-white/10 rounded-xl p-5" id="add-item-form">
+      <h3 class="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">Add New Item</h3>
+      <div class="grid grid-cols-2 gap-3 mb-3">
+        <input id="new-name" type="text" placeholder="Item name *" />
+        <input id="new-price" type="text" placeholder="Price (e.g. R$45)" />
+      </div>
+      <textarea id="new-desc" rows="2" placeholder="Description" class="mb-3"></textarea>
+      <button onclick="addItem()" class="btn-gold">+ Add Item</button>
+    </div>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">✓ Saved</div>
+
+<script>
+const SB_URL = 'https://wrsoacujxcskydlzgopa.supabase.co';
+const SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indyc29hY3VqeGNza3lkbHpnb3BhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTYwNTIxMSwiZXhwIjoyMDY1MTgxMjExfQ.DfHr_M1BFep1LVWpGSDfpMeb0vXqi17Y_VXoax96CvI';
+const PASSWORD = 'muda2024';
+
+let allItems = [];
+let activeCat = null;
+let dragSrc = null;
+
+// --- AUTH ---
+function login() {
+  if (document.getElementById('pw').value === PASSWORD) {
+    sessionStorage.setItem('muda_admin','1');
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    loadMenu();
+  } else {
+    document.getElementById('pw-err').classList.remove('hidden');
+  }
+}
+document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+function logout() { sessionStorage.removeItem('muda_admin'); location.reload(); }
+if (sessionStorage.getItem('muda_admin')==='1') {
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  loadMenu();
+}
+
+// --- LOAD ---
+async function loadMenu() {
+  const res = await fetch(`${SB_URL}/rest/v1/muda_menu_items?order=category_id.asc,sort_order.asc`, {
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` }
+  });
+  allItems = await res.json();
+  const cats = getCategories();
+  if (!activeCat || !cats.find(c=>c.id===activeCat)) activeCat = cats[0]?.id;
+  renderTabs();
+  renderEditor();
+}
+
+function getCategories() {
+  const seen = new Set();
+  const cats = [];
+  for (const item of allItems) {
+    if (!seen.has(item.category_id)) {
+      seen.add(item.category_id);
+      cats.push({ id: item.category_id, label: item.category_label });
+    }
+  }
+  return cats;
+}
+
+function getCatItems() {
+  return allItems.filter(i => i.category_id === activeCat).sort((a,b) => a.sort_order - b.sort_order);
+}
+
+// --- RENDER TABS ---
+function renderTabs() {
+  const cats = getCategories();
+  document.getElementById('category-tabs').innerHTML = cats.map(c => `
+    <button class="tab ${c.id===activeCat?'active':''}" onclick="switchCat('${c.id}')">${c.label}</button>
+  `).join('') + (activeCat ? `
+    <button class="btn-red ml-2" onclick="deleteCategory('${activeCat}')">Delete Category</button>
+  ` : '');
+}
+
+function switchCat(id) { activeCat = id; renderTabs(); renderEditor(); }
+
+// --- RENDER EDITOR ---
+function renderEditor() {
+  const items = getCatItems();
+  const cat = getCategories().find(c=>c.id===activeCat);
+  if (!cat) { document.getElementById('category-editor').innerHTML=''; return; }
+
+  document.getElementById('category-editor').innerHTML = `
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-white/50 text-sm">Category label:</span>
+      <input id="cat-label-input" value="${escHtml(cat.label)}" style="max-width:200px"
+        onchange="renameCat('${cat.id}', this.value)" />
+    </div>
+    <div id="items-list" class="space-y-2">
+      ${items.map(item => renderItemRow(item)).join('')}
+    </div>
+    ${items.length===0 ? '<p class="text-white/30 text-sm py-4 text-center">No items yet. Add one below.</p>' : ''}
+  `;
+  attachDragListeners();
+}
+
+function renderItemRow(item) {
+  return `
+    <div class="item-row border border-white/10 rounded-xl p-4 flex gap-3 items-start"
+      draggable="true" data-id="${item.id}">
+      <div class="text-white/30 mt-1 select-none text-lg" title="Drag to reorder">⠿</div>
+      <div class="flex-1 grid grid-cols-1 gap-2">
+        <div class="grid grid-cols-2 gap-2">
+          <input value="${escHtml(item.name)}" placeholder="Name"
+            onchange="updateField('${item.id}','name',this.value)" />
+          <input value="${escHtml(item.price||'')}" placeholder="Price"
+            onchange="updateField('${item.id}','price',this.value)" />
+        </div>
+        <textarea rows="2" placeholder="Description"
+          onchange="updateField('${item.id}','description',this.value)">${escHtml(item.description||'')}</textarea>
+      </div>
+      <div class="flex flex-col gap-2 flex-shrink-0">
+        <button class="btn-red" onclick="deleteItem('${item.id}')">Delete</button>
+        <button class="btn-ghost text-xs" onclick="saveItem('${item.id}')">Save</button>
+      </div>
+    </div>
+  `;
+}
+
+function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// --- DRAG AND DROP ---
+function attachDragListeners() {
+  const rows = document.querySelectorAll('.item-row');
+  rows.forEach(row => {
+    row.addEventListener('dragstart', e => {
+      dragSrc = row;
+      row.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    row.addEventListener('dragend', () => {
+      row.classList.remove('dragging');
+      document.querySelectorAll('.item-row').forEach(r => r.classList.remove('drag-over'));
+    });
+    row.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (row !== dragSrc) row.classList.add('drag-over');
+    });
+    row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+    row.addEventListener('drop', e => {
+      e.preventDefault();
+      row.classList.remove('drag-over');
+      if (dragSrc && dragSrc !== row) {
+        const list = document.getElementById('items-list');
+        const allRows = [...list.querySelectorAll('.item-row')];
+        const srcIdx = allRows.indexOf(dragSrc);
+        const dstIdx = allRows.indexOf(row);
+        if (srcIdx < dstIdx) row.after(dragSrc);
+        else row.before(dragSrc);
+        saveNewOrder();
+      }
+    });
+  });
+}
+
+async function saveNewOrder() {
+  const rows = [...document.querySelectorAll('.item-row')];
+  const updates = rows.map((r, i) => ({ id: r.dataset.id, sort_order: i }));
+  for (const u of updates) {
+    await fetch(`${SB_URL}/rest/v1/muda_menu_items?id=eq.${u.id}`, {
+      method: 'PATCH',
+      headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sort_order: u.sort_order })
+    });
+    const item = allItems.find(i => i.id === u.id);
+    if (item) item.sort_order = u.sort_order;
+  }
+  showToast('Order saved');
+}
+
+// --- CRUD ---
+async function updateField(id, field, value) {
+  const item = allItems.find(i => i.id === id);
+  if (item) item[field] = value;
+}
+
+async function saveItem(id) {
+  const item = allItems.find(i => i.id === id);
+  if (!item) return;
+  await fetch(`${SB_URL}/rest/v1/muda_menu_items?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: item.name, description: item.description, price: item.price, updated_at: new Date().toISOString() })
+  });
+  showToast('Item saved');
+}
+
+async function deleteItem(id) {
+  if (!confirm('Delete this item?')) return;
+  await fetch(`${SB_URL}/rest/v1/muda_menu_items?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` }
+  });
+  allItems = allItems.filter(i => i.id !== id);
+  renderEditor();
+  showToast('Item deleted');
+}
+
+async function addItem() {
+  const name = document.getElementById('new-name').value.trim();
+  const price = document.getElementById('new-price').value.trim();
+  const desc = document.getElementById('new-desc').value.trim();
+  if (!name) { alert('Item name is required'); return; }
+  const catItems = getCatItems();
+  const sortOrder = catItems.length > 0 ? Math.max(...catItems.map(i=>i.sort_order)) + 1 : 0;
+  const cat = getCategories().find(c=>c.id===activeCat);
+  const res = await fetch(`${SB_URL}/rest/v1/muda_menu_items`, {
+    method: 'POST',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+    body: JSON.stringify({ category_id: activeCat, category_label: cat.label, name, description: desc, price, sort_order: sortOrder, published: true })
+  });
+  const [newItem] = await res.json();
+  allItems.push(newItem);
+  document.getElementById('new-name').value = '';
+  document.getElementById('new-price').value = '';
+  document.getElementById('new-desc').value = '';
+  renderEditor();
+  showToast('Item added');
+}
+
+async function addCategory() {
+  const label = document.getElementById('new-cat-label').value.trim();
+  if (!label) return;
+  const id = label.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-');
+  // Add a placeholder item so the category exists
+  const res = await fetch(`${SB_URL}/rest/v1/muda_menu_items`, {
+    method: 'POST',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+    body: JSON.stringify({ category_id: id, category_label: label, name: '(New item)', description: '', price: '', sort_order: 0, published: true })
+  });
+  const [newItem] = await res.json();
+  allItems.push(newItem);
+  document.getElementById('new-cat-label').value = '';
+  activeCat = id;
+  renderTabs();
+  renderEditor();
+  showToast('Category added');
+}
+
+async function renameCat(catId, newLabel) {
+  // Update all items in this category
+  await fetch(`${SB_URL}/rest/v1/muda_menu_items?category_id=eq.${catId}`, {
+    method: 'PATCH',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category_label: newLabel })
+  });
+  allItems.filter(i=>i.category_id===catId).forEach(i=>i.category_label=newLabel);
+  renderTabs();
+  showToast('Category renamed');
+}
+
+async function deleteCategory(catId) {
+  const count = allItems.filter(i=>i.category_id===catId).length;
+  if (!confirm(`Delete entire "${catId}" category and all ${count} items?`)) return;
+  await fetch(`${SB_URL}/rest/v1/muda_menu_items?category_id=eq.${catId}`, {
+    method: 'DELETE',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` }
+  });
+  allItems = allItems.filter(i=>i.category_id!==catId);
+  activeCat = getCategories()[0]?.id || null;
+  renderTabs();
+  renderEditor();
+  showToast('Category deleted');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ' + msg;
+  t.style.display = 'block';
+  setTimeout(()=>t.style.display='none', 2000);
+}
+</script>
+</body>
+</html>
